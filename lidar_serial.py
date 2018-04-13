@@ -2,54 +2,72 @@ import socket
 from timeit import default_timer as timer
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
-#constants and commands 
+# constants and commands
 status = bytearray([0x02, 0x73, 0x052, 0x4E, 0x20, 0x4C, 0x43, 0x4D, 0x73, 0x74, 0x61, 0x74, 0x65, 0x03])
 operating_hours = bytearray([0x02, 0x73, 0x52, 0x4E, 0x20, 0x4F, 0x44, 0x6F, 0x70, 0x72, 0x68, 0x03])
-last_scan = bytearray([0x02, 0x73, 0x52, 0x4E, 0x20, 0x4C, 0x4D, 0x44, 0x73, 0x63, 0x61, 0x6E, 0x64, 0x61, 0x74, 0x61, 0x03])
+last_scan = bytearray(
+    [0x02, 0x73, 0x52, 0x4E, 0x20, 0x4C, 0x4D, 0x44, 0x73, 0x63, 0x61, 0x6E, 0x64, 0x61, 0x74, 0x61, 0x03])
 
 TCP_IP = '169.254.185.233'
 TCP_PORT = 2112
-BUFFER_SIZE = 8000 #arbitrary value, but big enough for all data in one scan
+BUFFER_SIZE = 8000  # arbitrary value, but big enough for all data in one scan
+
 
 class lidar_detected_object:
-	def __init__(self, radius, angle):
-		self.radius = radius
-		self.angle = angle
+    def __init__(self, radius, angle):
+        self.radius = radius
+        self.angle = angle
 
-	def print_info(self):
-		print('radius: ' + str(self.radius) + ' angle: ' + str(self.angle * 180.0/np.pi))
+    def print_info(self):
+        print('radius: ' + str(self.radius) + ' angle: ' + str(self.angle * 180.0 / np.pi))
+
+
+class fake_lidar_handler:
+    def __init__(self):
+        self.data = []
+
+    def get_scan(self):
+        angle = []
+        radius = []
+        startAngle = -45
+        endAngle = 225
+        for a in np.arange(startAngle, endAngle, .16667):
+            angle.append(a * .01745329251)
+            radius.append(random.uniform(.5, 4.0))
+        return (angle, radius)
+
 
 class lidar_handler:
-	def __init__(self):
-		self.data = []
+    def __init__(self):
+        self.data = []
 
-	def get_scan(self):
-		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		s.connect((TCP_IP, TCP_PORT))
-		start = timer() #testing performance
-		s.send(last_scan) #send data over socket
-		data = ""
-		data = s.recv(BUFFER_SIZE) #receive back data from socket
-		data_array = data.split() #splits data by space
-		#print(data_array)
-		data_points = int(data_array[25], 16)
-		#print('number of data points: ' + str(data_points))
+    def get_scan(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((TCP_IP, TCP_PORT))
+        start = timer()  # testing performance
+        s.send(last_scan)  # send data over socket
+        data = ""
+        data = s.recv(BUFFER_SIZE)  # receive back data from socket
+        data_array = data.split()  # splits data by space
+        # print(data_array)
+        data_points = int(data_array[25], 16)
+        # print('number of data points: ' + str(data_points))
 
-		angle = []
-		radius = []
+        angle = []
+        radius = []
 
-		cur_angle = -45.0 #depends on lidar
+        cur_angle = -45.0  # depends on lidar
 
-
-		try:
-			for x in range(0, data_points):
-				angle.append((cur_angle * 0.01745329251))
-				radius.append((int(data_array[26 + x], 16)/1000.0))
-				cur_angle+=1.0#depends on lidar
-		except:
-			print('Error with scan')
-		return(angle, radius)
+        try:
+            for x in range(0, data_points):
+                angle.append((cur_angle * 0.01745329251))
+                radius.append((int(data_array[26 + x], 16) / 1000.0))
+                cur_angle += 1.0  # depends on lidar
+        except:
+            print('Error with scan')
+        return (angle, radius)
 
 # while 1:
 # 	l = lidar_handler()
@@ -57,7 +75,7 @@ class lidar_handler:
 # 	print(radius[570])
 
 # while 1:
-	
+
 # 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # 	s.connect((TCP_IP, TCP_PORT))
 # 	start = timer() #testing performance
