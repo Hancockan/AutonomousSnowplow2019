@@ -18,20 +18,25 @@ class Node:
         return "Point: " + str(self.x) + ", " + str(self.y)
 
 
+def round_to(n, precision):
+    correction = 0.5 if n >= 0 else -0.5
+    return int(n / precision + correction) * precision
+
+
 def polar_to_world(x, y, lidar_theta, scan_theta, scan_radius):
     # print(str(x) + " " + str(y) + " " + str(lidar_theta) + " " + str(scan_theta) + " " + str(scan_radius))
 
     local_trans_x = []
     local_trans_y = []
     for t, r in list(zip(scan_theta, scan_radius)):
-        local_trans_x.append(round((x + (r * cos(lidar_theta + t))), 2))
-        local_trans_y.append(round((y + (r * sin(lidar_theta + t))), 2))
+        local_trans_x.append(round_to((x + (r * cos(lidar_theta + t))), .05))
+        local_trans_y.append(round_to((y + (r * sin(lidar_theta + t))), .05))
     return local_trans_x, local_trans_y
 
 
 def getPose():
-    lidarX = int(input("Enter Lidar X location: "))
-    lidarY = int(input("Enter Lidar Y location: "))
+    lidarX = float(input("Enter Lidar X location: "))
+    lidarY = float(input("Enter Lidar Y location: "))
     lidarTheta = float(input("Enter Lidar Theta (CCW is positive): "))
     lidarTheta = (lidarTheta - 90) * np.pi / 180.0
     return lidarX, lidarY, lidarTheta
@@ -69,18 +74,16 @@ def createWorld(resolution, xwidth, ywidth):
 
 
 if __name__ == "__main__":
-    grid, nodes = createWorld(0.01, 9, 9)
+    grid, nodes = createWorld(0.05, 10, 10)
     node_dict = dict(zip(grid, nodes))
 
-    l = fake_lidar_handler()
+    l = lidar_handler()
 
     fig = plt.figure()
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-    ax.set_ylim(-10, 10)
-    ax.set_xlim(-10, 10)
 
     while True:
-        xlid, ylid, theta = getFakePose()
+        xlid, ylid, theta = getPose()
         ax.set_ylim(-5, 5)
         ax.set_xlim(-5, 5)
         hitSizeList = []
@@ -94,12 +97,12 @@ if __name__ == "__main__":
             try:
                 cur_node = node_dict[(x, y)]
                 # print(cur_node)
-                cur_node.hits += 0.3
+                cur_node.hits += .1
                 hitSizeList.append(cur_node.hits)
             except:
                 print('too noisy')
-        ax.scatter(trans_x, trans_y, s=hitSizeList, c='b')
+        ax.scatter(trans_x, trans_y, s=3, c='b')
 
-        plt.pause(.01)
+        plt.pause(4)
         # plt.show()
-        plt.cla()
+        # plt.cla()
