@@ -23,14 +23,14 @@ def round_to(n, precision):
     return int(n / precision + correction) * precision
 
 
-def polar_to_world(x, y, lidar_theta, scan_theta, scan_radius):
+def polar_to_world(x, y, lidar_theta, scan_theta, scan_radius, resolution):
     # print(str(x) + " " + str(y) + " " + str(lidar_theta) + " " + str(scan_theta) + " " + str(scan_radius))
 
     local_trans_x = []
     local_trans_y = []
     for t, r in list(zip(scan_theta, scan_radius)):
-        local_trans_x.append(round_to((x + (r * cos(lidar_theta + t))), .05))
-        local_trans_y.append(round_to((y + (r * sin(lidar_theta + t))), .05))
+        local_trans_x.append(round_to((x + (r * cos(lidar_theta + t))), resolution))
+        local_trans_y.append(round_to((y + (r * sin(lidar_theta + t))), resolution))
     return local_trans_x, local_trans_y
 
 
@@ -74,7 +74,8 @@ def createWorld(resolution, xwidth, ywidth):
 
 
 if __name__ == "__main__":
-    grid, nodes = createWorld(0.05, 10, 10)
+    resolution = .01
+    grid, nodes = createWorld(resolution, 10, 10)
     node_dict = dict(zip(grid, nodes))
 
     l = lidar_handler()
@@ -91,7 +92,7 @@ if __name__ == "__main__":
         angle, radius = l.get_scan()
         # print(list(zip(angle, radius)))
 
-        trans_x, trans_y = polar_to_world(xlid, ylid, theta, angle, radius)
+        trans_x, trans_y = polar_to_world(xlid, ylid, theta, angle, radius, resolution)
         # print(list(zip(trans_x, trans_y)))
         for x, y in list(zip(trans_x, trans_y)):
             try:
