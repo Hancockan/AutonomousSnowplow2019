@@ -33,7 +33,8 @@ class fake_lidar_handler:
         radius = []
         startAngle = -45
         endAngle = 225
-        for a in np.arange(startAngle, endAngle, .16667):
+        resolution = 1
+        for a in np.arange(startAngle, endAngle, resolution):
             angle.append(a * .01745329251)
             radius.append(random.uniform(.5, 4.0))
         return (angle, radius)
