@@ -22,7 +22,7 @@ void lidar_handler::run() {
 		//make the data readable
 		analyze_scan();
 		//print to check
-		cout << endl << "distance at half: " << get<1>(raw_decimal_data[data_points/2]);
+		cout << "distance at half: " << get<1>(raw_decimal_data[data_points/2]) << endl;
 		//cout << "angle at half: " << get<0>(raw_decimal_data[data_points/2]) << endl;
 
 		//calculate run time
