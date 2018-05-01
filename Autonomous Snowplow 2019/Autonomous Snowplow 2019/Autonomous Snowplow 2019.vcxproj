@@ -125,13 +125,16 @@
   <ItemGroup>
     <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="lidar_handler.cpp" />
+    <ClCompile Include="local_handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SerialPort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="lidar_handler.h" />
+    <ClInclude Include="local_handler.h" />
     <ClInclude Include="SerialPort.h" />
+    <ClInclude Include="ssd_handler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
