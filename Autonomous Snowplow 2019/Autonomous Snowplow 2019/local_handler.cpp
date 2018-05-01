@@ -10,7 +10,7 @@ bool first_close = false;
 bool second_open = false;
 
 void local_handler::run() {
-	Serial* SP = new Serial("\\\\.\\COM5");    // adjust as needed
+	Serial* SP = new Serial("\\\\.\\COM3");    // adjust as needed
 	char incomingData[256] = "";			   // don't forget to pre-allocate memory
 											   //printf("%s\n",incomingData);
 	int dataLength = 255;
@@ -34,11 +34,11 @@ void local_handler::run() {
 							building_scan += incomingData;
 							recent_scan = building_scan;
 							building_scan = "";
-							cout << endl << "new location..." << endl;
-							//for (int i = 0; i < recent_scan.length(); i++) {
-							//	cout << recent_scan[i];
-							//}
-							//cout << endl;
+							//cout << endl << "new location..." << endl;
+							for (int i = 0; i < recent_scan.length(); i++) {
+								cout << recent_scan[i];
+							}
+							cout << endl;
 							first_open = false;
 							first_close = false;
 							second_open = false;
