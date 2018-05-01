@@ -111,11 +111,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lidar_handler.cpp" />
+    <ClCompile Include="local_handler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SerialPort.cpp" />
     <ClCompile Include="ssd_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lidar_handler.h" />
+    <ClInclude Include="local_handler.h" />
+    <ClInclude Include="SerialPort.h" />
     <ClInclude Include="ssd_handler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
