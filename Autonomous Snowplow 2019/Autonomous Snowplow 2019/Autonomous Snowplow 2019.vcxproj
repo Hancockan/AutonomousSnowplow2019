@@ -57,31 +57,18 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\OpenCV_props.props" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\OpenCV_props.props" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\OpenCV_props.props" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\OpenCV_props.props" />
-    <Import Project="..\..\..\..\..\..\..\..\Documents\Visual Studio 2015\Projects\HelloWorld\HelloWorld\PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\xpist\AppData\Local\Continuum\anaconda3\envs\tensorflow\include;</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Users\xpist\AppData\Local\Continuum\anaconda3\envs\tensorflow\include;</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -123,15 +110,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="lidar_handler.cpp" />
+    <ClCompile Include="local_handler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="orientation_handler.cpp" />
     <ClCompile Include="SerialPort.cpp" />
+    <ClCompile Include="ssd_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arduino.h" />
     <ClInclude Include="lidar_handler.h" />
+    <ClInclude Include="local_handler.h" />
+    <ClInclude Include="orientation_handler.h" />
     <ClInclude Include="SerialPort.h" />
+    <ClInclude Include="ssd_handler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

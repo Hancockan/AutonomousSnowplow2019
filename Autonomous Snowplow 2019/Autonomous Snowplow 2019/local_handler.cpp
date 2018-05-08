@@ -45,22 +45,22 @@ void local_handler::run() {
 							continue;
 						}
 					}
-					else {
+					else 
 						if (((string)incomingData).find('[') != -1) {
 							second_open = true;
-						}
+						
 					}
 				}
-				else {
+				else 
 					if (((string)incomingData).find(']') != -1) {
 						first_close = true;
-					}
+					
 				}
 			}
-			else {
+			else 
 				if (((string)incomingData).find('[') != -1) {
 					first_open = true;
-				}
+				
 			}
 			building_scan += incomingData;
 		}
