@@ -12,7 +12,7 @@ string mostRecent = "";
 string anotherFuckingString = "";
 double myfloat = 0.0;
 
-const char *portName = "\\\\.\\COM3";
+const char *portName = "\\\\.\\COM4";
 Serial* arduino = new Serial(portName);
 
 void orientation_handler::write(char c)

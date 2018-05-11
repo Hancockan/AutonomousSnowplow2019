@@ -17,7 +17,7 @@ Serial::Serial(const char *portName)
 	//Check if the connection was successfull
 	if (this->hSerial == INVALID_HANDLE_VALUE)
 	{
-		//If not success full display an Error
+		//If not successfull display an Error
 		if (GetLastError() == ERROR_FILE_NOT_FOUND) {
 
 			//Print Error if neccessary
