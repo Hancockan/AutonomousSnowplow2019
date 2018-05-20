@@ -1,4 +1,0 @@
-﻿  orientation_handler.cpp
-c:\users\andrew hancock\documents\visual studio 2015\projects\autonomous snowplow 2019\autonomous snowplow 2019\orientation_handler.cpp(30): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  Autonomous Snowplow 2019.vcxproj -> C:\Users\Andrew Hancock\Documents\Visual Studio 2015\Projects\Autonomous Snowplow 2019\Debug\Autonomous Snowplow 2019.exe
-  Autonomous Snowplow 2019.vcxproj -> C:\Users\Andrew Hancock\Documents\Visual Studio 2015\Projects\Autonomous Snowplow 2019\Debug\Autonomous Snowplow 2019.pdb (Partial PDB)
