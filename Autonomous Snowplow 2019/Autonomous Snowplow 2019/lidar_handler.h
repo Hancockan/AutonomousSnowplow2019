@@ -26,10 +26,18 @@ using namespace std;
 
 class lidar_handler {
 public:
-	lidar_handler();
+	struct lidar_data_packet {
+		vector<tuple<double, double>> raw_data;
+		int data_points;
+	};
+	lidar_handler(double x, double y);
 	void run();
 	void perform_scan();
 	void analyze_scan();
 	int convert_to_decimal(string num);
+	lidar_data_packet* get_data();
+	bool data_is_ready();
+	double get_x_loc();
+	double get_y_loc();
 };
 
